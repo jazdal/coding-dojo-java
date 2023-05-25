@@ -1,13 +1,16 @@
 public class VehicleTest {
     public static void main(String[] args) {
-        Vehicle bike = new Vehicle();
-        Vehicle car = new Vehicle();
+        Vehicle redVehicle = new Vehicle("red");
+        String color = redVehicle.getColor();
+        System.out.println("The vehicle color is: " + color);
 
+        Vehicle bike = new Vehicle();
         bike.setNumberOfWheels(2);
         bike.setColor("red");
         int bikeWheels = bike.getNumberOfWheels();
         String bikeColor = bike.getColor();
 
+        Vehicle car = new Vehicle();
         car.setNumberOfWheels(4);
         car.setColor("green");
         int carWheels = car.getNumberOfWheels();
