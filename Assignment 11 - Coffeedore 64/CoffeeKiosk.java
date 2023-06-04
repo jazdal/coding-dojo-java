@@ -28,16 +28,18 @@ public class CoffeeKiosk {
         
         Order order = new Order(name);
 
-        while (!itemNumber.equals("q")) {
+        while (!itemNumber.equalsIgnoreCase("q")) {
             displayMenu();
             System.out.println("Please enter a menu item index or 'q' to quit:\n");
             itemNumber = System.console().readLine();
-
+            
+            if (itemNumber.equalsIgnoreCase("q")) {
+                break;
+            }
+            
             try {
                 order.addItem(menu.get(Integer.parseInt(itemNumber)));
-            } catch(IndexOutOfBoundsException e) {
-                System.out.println("Invalid choice. Please enter a number from the menu or 'q' to quit.\n");
-            } catch(NumberFormatException e) {
+            } catch(Exception e) {
                 System.out.println("Invalid choice. Please enter a number from the menu or 'q' to quit.\n");
             }
         }
