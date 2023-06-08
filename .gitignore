@@ -1,6 +1,14 @@
 *.class
 *.classpath
+*.cmd
+*.jar
 *.project
+*.properties
+*.xml
+mvnw
 /.metadata/
 bin/
+.mvn/
 .settings/
+.vscode/
+ServletInitializer.java
