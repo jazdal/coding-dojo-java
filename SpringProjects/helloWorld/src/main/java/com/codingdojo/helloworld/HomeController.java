@@ -1,14 +1,27 @@
 package com.codingdojo.helloworld;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 @RequestMapping("/hello")
 public class HomeController {
 	@RequestMapping("")
-	public String hello() {
-		return "Hello World!";
+	public String hello(Model model) {
+		
+		String firstName = "Ada";
+		String lastName = "Lovelace";
+		String email = "ones@zeroes.com";
+		Integer age = 160;
+		
+		model.addAttribute("fruit", "banana");
+		model.addAttribute("first", firstName);
+		model.addAttribute("last", lastName);
+		model.addAttribute("email", email);
+		model.addAttribute("age", age);
+		
+		return "demo.jsp";
 	}
 	
 	@RequestMapping("/world")
