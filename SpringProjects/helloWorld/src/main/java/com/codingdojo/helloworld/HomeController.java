@@ -2,12 +2,13 @@ package com.codingdojo.helloworld;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/hello")
 public class HomeController {
-	@RequestMapping("")
+	@GetMapping("")
 	public String hello(Model model) {
 		
 		String firstName = "Ada";

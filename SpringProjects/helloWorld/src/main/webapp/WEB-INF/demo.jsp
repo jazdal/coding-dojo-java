@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Demo JSP</title>
+	<title>Demo JSP</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 	<% for(int i = 0; i < 5; i++) { %>
@@ -24,5 +24,6 @@
 	<p><c:out value="${last}"/></p>
 	<p><c:out value="${email}"/></p>
 	<p><c:out value="${age}"/></p>
+	<script type="text/javascript" src="/js/app.js"></script>
 </body>
 </html>
