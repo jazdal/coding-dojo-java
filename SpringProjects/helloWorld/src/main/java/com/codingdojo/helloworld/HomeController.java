@@ -25,7 +25,7 @@ public class HomeController {
 		return "demo.jsp";
 	}
 	
-	@RequestMapping("/world")
+	@GetMapping("/world")
 	public String world() {
 		return "Class level annotations are cool too!";
 	}
