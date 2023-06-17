@@ -85,6 +85,7 @@ public class MainController {
 		
 		session.setAttribute("totalGold", totalGold);
 		
+		@SuppressWarnings("rawtypes")
 		ListIterator listIterator = messages.listIterator(messages.size());
 		reversedMessages.clear();
 		while (listIterator.hasPrevious()) {
