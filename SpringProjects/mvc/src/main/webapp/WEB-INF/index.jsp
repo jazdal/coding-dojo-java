@@ -34,6 +34,8 @@
         		</c:forEach>
         	</tbody>
         </table>
+        <br>
+        <button class="btn btn-primary bg-gradient shadow fs-5 fw-semibold" onclick="location.href='/books/new'">Add a Book</button>
     </div>
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>
