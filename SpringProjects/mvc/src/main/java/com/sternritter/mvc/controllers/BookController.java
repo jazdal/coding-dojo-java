@@ -1,5 +1,7 @@
 package com.sternritter.mvc.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,14 @@ public class BookController {
 	BookService bookService;
 	
 	@GetMapping("/")
-	public String index() {
+	public String reroute() {
+		return "redirect:/books";
+	}
+	
+	@GetMapping("/books")
+	public String index(Model model) {
+		List<Book> books = bookService.allBooks();
+		model.addAttribute("books", books);
 		return "index.jsp";
 	}
 	
