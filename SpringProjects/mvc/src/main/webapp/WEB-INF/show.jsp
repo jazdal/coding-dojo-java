@@ -14,9 +14,9 @@
 <body>
     <div class="p-4 container">
         <h1><c:out value="${book.title}"/></h1>
-        <label for="description" class="form-label fs-5 fw-semibold">Description:</label>
+        <label for="description" class="mb-1 form-label fs-5 fw-semibold">Description:</label>
         <span class="fs-5"><c:out value="${book.description}"/></span><br>
-        <label for="description" class="form-label fs-5 fw-semibold">Language:</label>
+        <label for="language" class="mt-1 form-label fs-5 fw-semibold">Language:</label>
         <span class="fs-5"><c:out value="${book.language}"/></span><br>
         <label for="description" class="form-label fs-5 fw-semibold">Number of Pages:</label>
         <span class="fs-5"><c:out value="${book.numberOfPages}"/></span>

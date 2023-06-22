@@ -12,8 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -26,16 +25,19 @@ public class Book {
 	private long id;
 	
 	@NotNull
-	@Size(min = 5, max = 200)
+	@Size(min = 5, max = 200, message="Must be at least 5 characters")
 	private String title;
 	
-	@NotBlank
+	@NotNull
+	@Size(min = 5, max = 200, message="Must be at least 5 characters")
 	private String description;
 	
-	@NotEmpty
+	@NotNull
+	@Size(min = 3, max = 40, message="Must be at least 3 characters")
 	private String language;
 	
-	@NotNull
+	@NotNull(message="Must not be blank")
+	@Min(value=100, message="Must be at least 100 pages")
 	private Integer numberOfPages;
 	
 	//This will not allow the createdAt column to be updated after creation:
