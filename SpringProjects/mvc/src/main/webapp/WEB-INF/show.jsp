@@ -20,6 +20,8 @@
         <span class="fs-5"><c:out value="${book.language}"/></span><br>
         <label for="description" class="form-label fs-5 fw-semibold">Number of Pages:</label>
         <span class="fs-5"><c:out value="${book.numberOfPages}"/></span>
+        <br>
+        <button class="btn btn-primary bg-gradient shadow fs-5 fw-semibold" onclick="location.href='/books/${book.id}/edit'">Edit Book</button>
     </div>
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>
