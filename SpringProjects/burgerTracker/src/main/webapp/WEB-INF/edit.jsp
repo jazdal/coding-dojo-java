@@ -15,55 +15,33 @@
 </head>
 <body>
     <div class="p-4 container">
-        <h1 class="mb-5 text-primary">Burger Tracker</h1>
-        <table class="mb-5 table table-striped table-bordered shadow text-center fs-5">
-            <thead>
-                <tr class="table-active">
-                    <th scope="col">Burger Name</th>
-                    <th scope="col">Restaurant Name</th>
-                    <th scope="col">Rating (out of 5)</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="burger" items="${burgers}">
-                    <tr>
-                        <td><c:out value="${burger.burgerName}"/></td>
-                        <td><c:out value="${burger.restaurantName}"/></td>
-                        <td><c:out value="${burger.rating}"/></td>
-                        <td><a href="/burgers/edit/${burger.id}">edit</a></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <hr>
-        <h2 class="mb-5 text-primary">Add a Burger:</h2>
-        <form:form class="p-4 border shadow" action="/burgers/new" method="POST" modelAttribute="burger">
+        <h1 class="mb-5 text-primary">Edit Burger</h1>
+        <form:form class="p-4 border shadow" action="/burgers/edit/${burger.id}" method="PUT" modelAttribute="burger">
         	<div class="row">
         		<form:label path="burgerName" class="col-sm-3 form-label fs-5 fw-semibold">Burger Name</form:label>
         		<div class="mb-4 col-sm-9">
-        			<form:input type="text" class="form-control fs-5" path="burgerName" placeholder="Type burger name here"/>
+        			<form:input type="text" class="form-control fs-5" path="burgerName"/>
         			<form:errors path="burgerName" class="text-danger"/>
         		</div>
         	</div>
         	<div class="row">
         		<form:label path="restaurantName" class="col-sm-3 form-label fs-5 fw-semibold">Restaurant Name</form:label>
         		<div class="mb-4 col-sm-9">
-        			<form:input type="text" class="form-control fs-5" path="restaurantName" placeholder="Type restaurant name here"/>
+        			<form:input type="text" class="form-control fs-5" path="restaurantName"/>
         			<form:errors path="restaurantName" class="text-danger"/>
         		</div>
         	</div>
         	<div class="row">
         		<form:label path="rating" class="col-sm-3 form-label fs-5 fw-semibold">Rating</form:label>
         		<div class="mb-4 col-sm-9">
-        			<form:input type="number" class="form-control fs-5" path="rating" placeholder="Enter rating here"/>
+        			<form:input type="number" class="form-control fs-5" path="rating"/>
         			<form:errors path="rating" class="text-danger"/>
         		</div>
         	</div>
         	<div class="row">
         		<form:label path="notes" class="col-sm-3 form-label fs-5 fw-semibold">Notes</form:label>
         		<div class="mb-4 col-sm-9">
-        			<form:textarea rows="3" class="form-control fs-5" path="notes" placeholder="Type notes here"/>
+        			<form:textarea rows="3" class="form-control fs-5" path="notes"/>
         			<form:errors path="notes" class="text-danger"/>
         		</div>
         	</div>
