@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.index {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+img {
+	width: 30%;
+}
+
+#search-box {
+	width: 25vw;
+}
