@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+#content {
+	height: 80vh;
+}
+
+.card {
+  transition: transform 0.2s, background-color 0.2s;
+  background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+  cursor: pointer;
+}
+
+.card:active {
+  transform: scale(0.95);
+  transition: transform 0.2s;
+  background: linear-gradient(to bottom, #f5f5f5, #dddddd);
+}
+
+#dojoForm {
+	width: 50vw;
+}
+
+p {
+	color: gray;
+}
+
+#ninjaForm {
+	width: 60vw;
+}
+
+#ninjaTable {
+	width: 80vw;
+}
