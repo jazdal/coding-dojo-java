@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+#regForm {
+	width: 85vw;
+}
+
+#title {
+	color: rebeccapurple;
+}
+
+#book_title {
+	color: rebeccapurple;
+	font-weight: bold;
+	font-style: italic;
+}
+
+#thoughts {
+	margin: auto;
+	width: 60vw;
+}
