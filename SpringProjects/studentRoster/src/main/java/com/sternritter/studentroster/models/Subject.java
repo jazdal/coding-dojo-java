@@ -12,71 +12,61 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="students")
-public class Student {
+@Table(name = "subjects")
+public class Subject {
 	// MODEL STRUCTURE
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotNull
-	@Size(min=2, max=200, message="Student name must have at least 2 characters.")
-	private String name;
+	@NotBlank(message = "Class name is required.")
+	@Size(min = 3, max = 80, message = "Class name should be at least 3 characters long.")
+	private String className;
 	
 	// This will not allow the createdAt column to be updated after creation:
-	@Column(updatable=false)
+	@Column(updatable = false)
 	private Date createdAt;
 	
 	private Date updatedAt;
 	
 	// Indicates relationship with the other table
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="dorm_id")
-	private Dorm dorm;
-	
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "student_classes", 
-			joinColumns = @JoinColumn(name = "student_id"), 
-			inverseJoinColumns = @JoinColumn(name = "subject_id")
+			joinColumns = @JoinColumn(name = "subject_id"), 
+			inverseJoinColumns = @JoinColumn(name = "student_id")
 	)
-	private List<Subject> subjects;
+	private List<Student> students;
 	
-	// REQUIRED CONSTRUCTORS
+	// CONSTRUCTORS
 	// Constructor 1: Blank constructor
-	public Student() {
+	public Subject() {
 	}
 
-	/* Constructor 2: With required fields
-	 * When creating this second constructor, do not
-	 * include the id, createdAt, and updatedAt fields */
-	public Student(
-			String name,
-			Dorm dorm, 
-			List<Subject> subjects
+	// Constructor 2: With fields
+	public Subject(
+			String className,
+			List<Student> students
 			) {
-		this.name = name;
-		this.dorm = dorm;
-		this.subjects = subjects;
+		this.className = className;
+		this.students = students;
 	}
 	
 	// Constructor 3: Special constructor for timestamps
 	@PrePersist
-	protected void onCreate() {
+	public void onCreate() {
 		this.createdAt = new Date();
-		this.updatedAt = new Date();
 	}
 	
 	@PreUpdate
-	protected void onUpdate() {
+	public void onUpdate() {
 		this.updatedAt = new Date();
 	}
 
@@ -89,12 +79,12 @@ public class Student {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getClassName() {
+		return className;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setClassName(String className) {
+		this.className = className;
 	}
 
 	public Date getCreatedAt() {
@@ -113,19 +103,11 @@ public class Student {
 		this.updatedAt = updatedAt;
 	}
 
-	public Dorm getDorm() {
-		return dorm;
+	public List<Student> getStudents() {
+		return students;
 	}
 
-	public void setDorm(Dorm dorm) {
-		this.dorm = dorm;
-	}
-
-	public List<Subject> getSubjects() {
-		return subjects;
-	}
-
-	public void setSubjects(List<Subject> subjects) {
-		this.subjects = subjects;
+	public void setStudents(List<Student> students) {
+		this.students = students;
 	}
 }

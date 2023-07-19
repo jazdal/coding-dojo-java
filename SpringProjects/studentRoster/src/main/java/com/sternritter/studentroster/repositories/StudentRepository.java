@@ -12,4 +12,7 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
 	
 	// This method retrieves all students belonging to a certain dorm:
 	List<Student> findByDormIdIs(Long dormId);
+	
+	// This method retrieves all students taking a particular subject:
+	List<Student> findBySubjectsIdIs(Long subjectId);
 }

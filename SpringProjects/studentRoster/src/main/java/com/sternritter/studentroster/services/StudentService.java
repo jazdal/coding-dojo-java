@@ -41,6 +41,11 @@ public class StudentService {
 		return studentRepository.findByDormIdIs(dormId);
 	}
 	
+	// Retrieves all students taking a particular subject (READ):
+	public List<Student> getStudentsBySubject(Long subjectId) {
+		return studentRepository.findBySubjectsIdIs(subjectId);
+	}
+	
 	// Updates an existing student (UPDATE):
 	public Student update(Student student) {
 		return studentRepository.save(student);

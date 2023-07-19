@@ -9,29 +9,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dorms</title>
+    <title>All Classes</title>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
     <div id="dashboard" class="p-4 container">
-        <h1 class="mb-5 text-center">Dorms</h1>
-        <a class="fs-4" href="/dorms/new">Add a new dorm</a><br>
-        <a class="fs-4" href="/students/new">Add a new student</a><br>
-        <a class="fs-4" href="/classes/new">Add a new class</a><br>
-        <a class="fs-4" href="/classes">View all classes</a>
+        <h1 class="mb-5 text-center">All Classes</h1>
+        <a class="fs-4" href="/">Dashboard</a>
         <table class="mt-4 table table-striped table-bordered shadow text-center fs-5">
             <thead>
                 <tr class="table-active">
-                    <th scope="col">Dorm</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Class</th>
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="dorm" items="${dorms}">
+                <c:forEach var="subject" items="${subjects}">
                     <tr>
-                        <td><c:out value="${dorm.name}"/></td>
-                        <td><a href="/dorms/${dorm.id}">See Students</a></td>
+                        <td><a href="/classes/${subject.id}">${subject.className}</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

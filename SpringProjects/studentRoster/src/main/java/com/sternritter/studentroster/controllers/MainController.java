@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sternritter.studentroster.models.Dorm;
 import com.sternritter.studentroster.models.Student;
+import com.sternritter.studentroster.models.Subject;
 import com.sternritter.studentroster.services.DormService;
 import com.sternritter.studentroster.services.StudentService;
+import com.sternritter.studentroster.services.SubjectService;
 
 import jakarta.validation.Valid;
 
@@ -25,6 +27,9 @@ public class MainController {
 	
 	@Autowired
 	StudentService studentService;
+	
+	@Autowired
+	SubjectService subjectService;
 	
 	@GetMapping("/")
 	public String reroute() {
@@ -108,5 +113,76 @@ public class MainController {
 	public String removeStudent(@PathVariable("id") Long id) {
 		studentService.removeFromDorm(studentService.findStudent(id));
 		return "redirect:/dorms";
+	}
+	
+	@GetMapping("/classes/new")
+	public String newClassForm(@ModelAttribute("class") Subject subject) {
+		return "newclass.jsp";
+	}
+	
+	@PostMapping("/classes/new")
+	public String addClass(
+			@Valid @ModelAttribute("class") Subject subject, 
+			BindingResult result
+			) {
+		if (result.hasErrors()) {
+			return "newclass.jsp";
+		}
+		subjectService.create(subject);
+		return "redirect:/classes";
+	}
+	
+	@GetMapping("/classes")
+	public String showClasses(Model model) {
+		model.addAttribute("subjects", subjectService.getAll());
+		return "allclasses.jsp";
+	}
+	
+	@GetMapping("/classes/{classId}")
+	public String showStudentsInClass(
+			@PathVariable("classId") Long id, 
+			Model model
+			) {
+		model.addAttribute("subject", subjectService.getSubject(id));
+		model.addAttribute("students", studentService.getStudentsBySubject(id));
+		return "classStudents.jsp";
+	}
+	
+	@GetMapping("/students/{studentId}")
+	public String showClassesofStudents(
+			@PathVariable("studentId") Long id, 
+			@ModelAttribute("subject") Subject subject, 
+			Model model
+			) {
+		model.addAttribute("student", studentService.findStudent(id));
+		model.addAttribute("allSubjects", subjectService.getAll()); 
+		model.addAttribute("studentSubjects", subjectService.getStudentSubjects(id));
+		return "studentClasses.jsp";
+	}
+	
+	@PostMapping("/subjects/addToStudent/{studentId}")
+	public String addToStudent(
+			@ModelAttribute("student") Student student, 
+			@PathVariable("studentId") Long studentId, 
+			@RequestParam("id") Long subjectId
+			) {
+		student = studentService.findStudent(studentId);
+		Subject subject = subjectService.getSubject(subjectId);
+		if (student != null && subject != null) {
+			student.getSubjects().add(subject);
+			studentService.update(student);
+		}
+		return "redirect:/students/" + studentId;
+	}
+	
+	@GetMapping("/subjects/remove/{subjectId}/{studentId}")
+	public String removeSubject(
+			@PathVariable("subjectId") Long subjectId, 
+			@PathVariable("studentId") Long studentId
+			) {
+		Student student = studentService.findStudent(studentId);
+		Subject subject = subjectService.getSubject(subjectId);
+		subjectService.removeFromSubject(subject, student);
+		return "redirect:/students/" + studentId;
 	}
 }

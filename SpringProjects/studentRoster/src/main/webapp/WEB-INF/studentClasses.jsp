@@ -9,22 +9,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>${dorm.name}</title>
+    <title>${student.name}</title>
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
     <div id="dashboard" class="p-4 container">
-        <h1 class="mb-5 text-center">${dorm.name} Students</h1>
+        <h1 class="mb-5 text-center">${student.name}'s Classes</h1>
         <a class="fs-4" href="/dorms">Dashboard</a>
-        <form:form class="p-4 mt-4 mb-5 bg-primary-subtle bg-gradient border shadow fs-5" action="/students/addToDorm/${dorm.id}" method="POST" modelAttribute="dorm">
+        <form:form class="p-4 mt-4 mb-5 bg-primary-subtle bg-gradient border shadow fs-5" action="/subjects/addToStudent/${student.id}" method="POST" modelAttribute="student">
         	<div class="row">
         		<div class="col-sm-6 text-center">
-        			<form:label path="id" class="form-label fs-4 fw-semibold">Students</form:label>
+        			<form:label path="id" class="form-label fs-4 fw-semibold">Classes</form:label>
         			<form:select path="id" class="form-select fs-5">
-        				<c:forEach var="student" items="${allStudents}">
-        					<form:option value="${student.id}" path="id">
-        						<c:out value="${student.name}"/> (<c:out value="${student.dorm.name}"/>)
+        				<c:forEach var="subject" items="${allSubjects}">
+        					<form:option value="${subject.id}" path="id">
+        						<c:out value="${subject.className}"/>
         					</form:option>
         				</c:forEach>
         			</form:select>
@@ -38,15 +38,15 @@
         <table class="mt-4 table table-striped table-bordered shadow text-center fs-5">
         	<thead>
                 <tr class="table-active">
-                    <th scope="col">Student</th>
+                    <th scope="col">Class Name</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="student" items="${dormStudents}">
+                <c:forEach var="subject" items="${studentSubjects}">
                     <tr>
-                        <td><a href="/students/${student.id}"><c:out value="${student.name}"/></a></td>
-                        <td><a href="/students/remove/${student.id}">Remove</a></td>
+                        <td><a href="/subjects/${subject.id}"><c:out value="${subject.className}"/></a></td>
+                        <td><a href="/subjects/remove/${subject.id}/${student.id}">Drop</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
